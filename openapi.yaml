@@ -1,0 +1,89 @@
+
+# CMS OPenAPI
+
+openapi: 3.0.3
+
+info:
+  title: wicrypt
+  version: '1.2'
+  
+externalDocs:
+  description: More information about CMS API
+  url: http://mycollege.com/api
+  
+servers:
+  - url: http://localhost:44333/api
+  - url: http://localhost:{port}/stagingapi
+    variables:
+      port:
+        enum:
+          - "44333"
+          - '8990'
+        default: !!str 44333
+        
+tags:
+  - name: campaign
+    description: Obtain information about campaign from 
+      the wicrypt database
+    
+paths:
+  /campaigns:
+    summary: OPeration about campaigns
+    get:
+      tags:
+        - campaign
+      summary: Get all the campaign
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                 type: array
+                 items:
+                   properties:
+                     id:
+                       type: integer
+                       example: 4
+                    
+                     campaign name:
+                       type: string
+                       example: Bootleg
+                       
+                     campaign amount:
+                       type: decimal
+                       example: 2000
+                       
+                     campaign duration:
+                        type: string
+                        example: 1 week
+                        
+    post:
+      description: Create a new Campaign in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+               type: object
+               properties:
+                 id:
+                   type: integer
+                   example: 4
+                    
+                 campaign name:
+                   type: string
+                   example: Bootleg
+                       
+                 campaign amount:
+                   type: decimal
+                   example: 2000
+                       
+                 campaign duration:
+                   type: string
+                   example: 1 week
+                        
+    
+    
+                       
+                      
